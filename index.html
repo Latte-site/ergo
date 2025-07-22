@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>喉発音 音節分解サイト</title>
+</head>
+<body>
+  <h1>英語を音節で分解する</h1>
+  <input type="text" id="word" placeholder="英単語を入力してね">
+  <button onclick="split()">分解</button>
+  <p id="result">←ここに結果が出ます</p>
+
+  <script>
+    function splitSyllables(word) {
+      const vowels = 'aeiouy';
+      let result = [];
+      let temp = '';
+
+      for (let i = 0; i < word.length; i++) {
+        temp += word[i];
+        if (vowels.includes(word[i].toLowerCase()) && temp.length > 1) {
+          result.push(temp);
+          temp = '';
+        }
+      }
+      if (temp) result.push(temp);
+      return result.join(' / ');
+    }
+
+    function split() {
+      const word = document.getElementById('word').value;
+      const result = splitSyllables(word);
+      document.getElementById('result').textContent = result;
+    }
+  </script>
+</body>
+</html>
